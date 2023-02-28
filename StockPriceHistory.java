@@ -3,9 +3,8 @@ import java.util.Calendar;
 /**
  * Retrieve historical stock prices
  */
-public class StockPriceHistory
+public class StockPriceHistory 
 {
-
     private final String TICKER = "GOOG";
     
     /**
@@ -15,6 +14,10 @@ public class StockPriceHistory
         try {
             Stock stock = YahooFinance.get(TICKER, true);
             System.out.println(stock);
+            Calendar from = Calendar.getInstance();
+            Calendar to = Calendar.getInstance();
+            from.add(Calendar.YEAR, -6);
+            
         } catch (Exception e) {
             System.out.println("Error in stock call");    
         }
