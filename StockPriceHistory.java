@@ -1,5 +1,6 @@
 import yahoofinance.*;
 import java.util.Calendar;
+import java.util.List;
 /**
  * Retrieve historical stock prices
  */
