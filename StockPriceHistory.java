@@ -4,6 +4,8 @@ import java.util.List;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.histquotes.HistoricalQuote;
 import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 /**
  * Retrieve historical stock prices
  */
@@ -21,8 +23,14 @@ public class StockPriceHistory
             Calendar from  = Calendar.getInstance();
             Calendar to = Calendar.getInstance();
             from.add(Calendar.MONTH, -1);
-            List<HistoricalQuote> h = stock.getHistory(from, to, Interval.DAILY);
-            h.forEach((e) -> System.out.println((h)));
+            List<HistoricalQuote> quotes = stock.getHistory(from, to, Interval.DAILY);
+            
+            for (HistoricalQuote quote : quotes) {
+                BigDecimal price = quote.getClose();
+                String formattedDate = formatDate(quote.getDate());
+                System.out.println(formattedDate + "," + price);
+            }
+            
         } catch (Exception e) {
             System.out.println("Error in stock call");    
         }
