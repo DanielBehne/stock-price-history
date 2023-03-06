@@ -6,6 +6,7 @@ import yahoofinance.histquotes.HistoricalQuote;
 import java.util.ArrayList;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.math.RoundingMode;
 /**
  * Retrieve historical stock prices
  */
@@ -25,8 +26,10 @@ public class StockPriceHistory
             from.add(Calendar.MONTH, -1);
             List<HistoricalQuote> quotes = stock.getHistory(from, to, Interval.DAILY);
             
+            int places = 2;
             for (HistoricalQuote quote : quotes) {
                 BigDecimal price = quote.getClose();
+                price = price.setScale(places, RoundingMode.HALF_UP);
                 String formattedDate = formatDate(quote.getDate());
                 System.out.println(formattedDate + "," + price);
             }
